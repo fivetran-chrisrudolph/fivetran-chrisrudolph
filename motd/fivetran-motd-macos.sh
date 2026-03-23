@@ -25,6 +25,24 @@ USED_RAM=$(echo "$PAGES_ACTIVE $PAGES_WIRED $PAGE_SIZE" | awk '{printf "%.1fGi",
 
 DISK_USAGE=$(df -h / | awk 'NR==2 {print $3 "/" $2 " (" $5 ")"}')
 
+# System Information
+echo -e "${CYAN}╭─────────────────────────────────────────╮${NC}"
+echo -e "${CYAN}│${NC} ${GREEN}System Information${NC}                   ${CYAN}│${NC}"
+echo -e "${CYAN}├─────────────────────────────────────────┤${NC}"
+echo -e "${CYAN}│${NC} ${YELLOW}Hostname:${NC} $HOSTNAME"
+echo -e "${CYAN}│${NC} ${YELLOW}OS:${NC} $OS"
+echo -e "${CYAN}│${NC} ${YELLOW}Kernel:${NC} $KERNEL"
+echo -e "${CYAN}│${NC} ${YELLOW}Uptime:${NC} $UPTIME"
+echo -e "${CYAN}├─────────────────────────────────────────┤${NC}"
+echo -e "${CYAN}│${NC} ${GREEN}Hardware${NC}                              ${CYAN}│${NC}"
+echo -e "${CYAN}├─────────────────────────────────────────┤${NC}"
+echo -e "${CYAN}│${NC} ${YELLOW}CPU:${NC} $CPU_MODEL"
+echo -e "${CYAN}│${NC} ${YELLOW}Cores:${NC} $CPU_CORES"
+echo -e "${CYAN}│${NC} ${YELLOW}Memory:${NC} $USED_RAM / $TOTAL_RAM"
+echo -e "${CYAN}│${NC} ${YELLOW}Disk:${NC} $DISK_USAGE"
+echo -e "${CYAN}╰─────────────────────────────────────────╯${NC}"
+echo ""
+
 # Fivetran Logo and Name ASCII Art
 echo -e "${BLUE}"
 cat << "EOF"
@@ -43,22 +61,3 @@ cat << "EOF"
 
 EOF
 echo -e "${NC}"
-echo ""
-
-# System Information
-echo -e "${CYAN}╭─────────────────────────────────────────╮${NC}"
-echo -e "${CYAN}│${NC} ${GREEN}System Information${NC}                   ${CYAN}│${NC}"
-echo -e "${CYAN}├─────────────────────────────────────────┤${NC}"
-echo -e "${CYAN}│${NC} ${YELLOW}Hostname:${NC} $HOSTNAME"
-echo -e "${CYAN}│${NC} ${YELLOW}OS:${NC} $OS"
-echo -e "${CYAN}│${NC} ${YELLOW}Kernel:${NC} $KERNEL"
-echo -e "${CYAN}│${NC} ${YELLOW}Uptime:${NC} $UPTIME"
-echo -e "${CYAN}├─────────────────────────────────────────┤${NC}"
-echo -e "${CYAN}│${NC} ${GREEN}Hardware${NC}                              ${CYAN}│${NC}"
-echo -e "${CYAN}├─────────────────────────────────────────┤${NC}"
-echo -e "${CYAN}│${NC} ${YELLOW}CPU:${NC} $CPU_MODEL"
-echo -e "${CYAN}│${NC} ${YELLOW}Cores:${NC} $CPU_CORES"
-echo -e "${CYAN}│${NC} ${YELLOW}Memory:${NC} $USED_RAM / $TOTAL_RAM"
-echo -e "${CYAN}│${NC} ${YELLOW}Disk:${NC} $DISK_USAGE"
-echo -e "${CYAN}╰─────────────────────────────────────────╯${NC}"
-echo ""
