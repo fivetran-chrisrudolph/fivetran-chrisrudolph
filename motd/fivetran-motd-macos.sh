@@ -23,7 +23,10 @@ PAGES_ACTIVE=$(vm_stat 2>/dev/null | awk '/^Pages active/ {gsub(/\./, "", $3); p
 PAGES_WIRED=$(vm_stat 2>/dev/null | awk '/^Pages wired down/ {gsub(/\./, "", $4); print $4+0}')
 USED_RAM=$(echo "$PAGES_ACTIVE $PAGES_WIRED $PAGE_SIZE" | awk '{printf "%.1fGi", ($1+$2)*$3/1073741824}')
 
-DISK_USAGE=$(df -h / | awk 'NR==2 {print $3 "/" $2 " (" $5 ")"}')
+DISK_USAGE=$(df -k / | awk 'NR==2 {
+    used = $2 - $4
+    printf "%.0fGi/%.0fGi (%d%%)", used/1048576, $2/1048576, used*100/$2
+}')
 
 # System Information
 echo -e "${CYAN}╭─────────────────────────────────────────╮${NC}"
